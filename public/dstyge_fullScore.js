@@ -50,13 +50,17 @@ var NUMTRACKS = 5;
 var TRACK_X_OFFSET = 800;
 var TRACK_Y_OFFSET = 10;
 var TRACK_DIAMETER = 20;
-var SPACE_BETWEEN_TRACKS = GOFRETWIDTH + 15;
+var SPACE_BETWEEN_TRACKS = 300;
+var trLoc = [];
+for (var i = 0; i < NUMTRACKS; i++) {
+  trLoc.push(0);
+}
 // GOFRETS //////////////////////////////////////////////////////////////
 //// Beats //////////////////////////////////
 var GOFRETLENGTH = 32;
 var GOFRETHEIGHT = 14;
 var GOFRETPOSZ = (-GOFRETLENGTH / 2) + 1;
-var GOFRETWIDTH = 190;
+var GOFRETWIDTH = 250;
 var goFretBigAdd = 5;
 var goFretGeom = new THREE.CubeGeometry(GOFRETWIDTH, GOFRETHEIGHT, GOFRETLENGTH);
 var goFretGeomBig = new THREE.CubeGeometry(GOFRETWIDTH + goFretBigAdd, GOFRETHEIGHT + goFretBigAdd, GOFRETLENGTH + goFretBigAdd);
@@ -85,11 +89,11 @@ for (var i = 0; i < NUMTRACKS; i++) {
 // NOTATION SVGS /////////////////////////////////////////////////////////
 var SVG_NS = "http://www.w3.org/2000/svg";
 var SVG_XLINK = 'http://www.w3.org/1999/xlink';
-var notationContainers = [];
 var notationContainerDOMs = [];
 var NOTATION_CONTAINER_H = 350.0;
 var dictOfNotationSVGsByPart = {};
 var currentNotationById = [];
+var trLabels = ["Shaker", "Bottles", "HandClap", "Cow Bells", "Kit"];
 // EVENTS ////////////////////////////////////////////////////////////////
 var eventMatrix = [];
 //// Beat Markers //////////////////////////////////
@@ -118,13 +122,14 @@ function init() {
   if (!played) {
     played = true;
     startButton.parentNode.removeChild(startButton);
-    eventMatrix = createEvents(); //startPiece trigger at end of this function
+    createScene();
+    // eventMatrix = createEvents(); //startPiece trigger at end of this function
   }
 }
 // FUNCTION: startPiece --------------------------------------------------------------- //
 function startPiece() {
   createScene();
-  requestAnimationFrame(animationEngine);
+  // requestAnimationFrame(animationEngine);
 }
 // FUNCTION: createScene ------------------------------------------------------------- //
 function createScene() {
@@ -166,41 +171,63 @@ function createScene() {
   });
   for (var i = 0; i < NUMTRACKS; i++) {
     var t_trX;
-    //if even num tracks
+    var halfTr = SPACE_BETWEEN_TRACKS / 2;
+    //if even num of tracks
     if (NUMTRACKS % 2 == 0) {
+      //even numbered tracks are on the left
       if (i % 2 == 0) {
         if (i == 0) {
-          t_trX = -SPACE_BETWEEN_TRACKS;
+          t_trX = -halfTr;
+          trLoc[i] = t_trX;
         } else {
-          t_trX = -SPACE_BETWEEN_TRACKS * (i / 2);
+          t_trX = (-SPACE_BETWEEN_TRACKS * (i / 2)) - halfTr;
+          trLoc[i] = t_trX;
         }
-      } 
+      }
+      //odd numbered tracks on the right
       else {
-        if (i == 0) {
-          t_trX = 0
+        if (i == 1) {
+          t_trX = halfTr;
+          trLoc[i] = t_trX;
         } else {
-          if (i % 2 == 0) {
-            t_trX = -SPACE_BETWEEN_TRACKS * (i / 2);
-          } else {
-            t_trX = SPACE_BETWEEN_TRACKS * ((i - 1) / 2);
-          }
+          t_trX = (SPACE_BETWEEN_TRACKS * (((i - 1) / 2) + 1)) - halfTr;
+          trLoc[i] = t_trX;
+          console.log(trLoc);
         }
       }
     }
+    //if odd number of tracks
+    else {
+      //1st track goes in the middle
+      if (i == 0) {
+        t_trX = 0;
+        trLoc[i] = t_trX;
+      } else {
+        //even numbered tracks to the right
+        if (i % 2 == 0) {
+          t_trX = SPACE_BETWEEN_TRACKS * (i / 2);
+          trLoc[i] = t_trX;
+        }
+        //odd numbered tracks to the left
+        else {
+          t_trX = -SPACE_BETWEEN_TRACKS * (((i - 1) / 2) + 1);
+          trLoc[i] = t_trX;
+        }
+      }
+
+    }
+
     var tTr = new THREE.Mesh(trgeom, trmatl);
     tTr.rotation.x = rads(-90);
     tTr.position.z = -(RUNWAYLENGTH / 2);
     tTr.position.y = (-TRACK_DIAMETER / 2) + TRACK_Y_OFFSET;
-    var trackMarginFromEdge = 110;
-    var runwayEdgeL = -SCENE_W / 2;
-    var trackRx = runwayEdgeL + trackMarginFromEdge;
-    tTr.position.x = trackRx;
+    tTr.position.x = t_trX;
     scene.add(tTr);
+
   }
-}
-/*
+  for (var i = 0; i < NUMTRACKS; i++) {
     // GO FRETS ////////////////////////////////////////////////////////////////////////////
-    //// BEATS ////////////////////////////////////////
+    //// BEAT GO INDICATOR ////////////////////////////////////////
     var tGoFretSet = [];
     var goFretMatl = new THREE.MeshLambertMaterial({
       color: clr_neonGreen
@@ -208,13 +235,12 @@ function createScene() {
     tGoFret = new THREE.Mesh(goFretGeom, goFretMatl);
     tGoFret.position.z = GOFRETPOSZ;
     tGoFret.position.y = GOFRETHEIGHT;
-    var tTrackXpos = -TRACK_X_OFFSET + (SPACE_BETWEEN_TRACKS * i);
-    tGoFret.position.x = tTrackXpos;
+    tGoFret.position.x = trLoc[i];
     scene.add(tGoFret);
     tGoFretSet.push(tGoFret);
     tGoFretSet.push(goFretMatl);
-    goFrets.push(tGoFretSet);
-    //// EVENTS ///////////////////////////////////////
+    goFrets.push(tGoFretSet); // [mesh, matl]
+    //// EVENT GO INDICATORS ///////////////////////////////////////
     var t_eventGoFretSet = [];
     var t_eventGoFretMatl = new THREE.MeshLambertMaterial({
       color: clr_yellow
@@ -222,51 +248,65 @@ function createScene() {
     t_eventGoFret = new THREE.Mesh(eventGoFretGeom, t_eventGoFretMatl);
     t_eventGoFret.position.z = EVENTGOFRETPOSZ;
     t_eventGoFret.position.y = EVENTGOFRETHEIGHT;
-    t_eventGoFret.position.x = tTrackXpos; //see beats
+    t_eventGoFret.position.x = trLoc[i];
     scene.add(t_eventGoFret);
     t_eventGoFretSet.push(t_eventGoFret);
     t_eventGoFretSet.push(t_eventGoFretMatl);
-    eventGoFrets.push(t_eventGoFretSet);
-    // NOTATION CONTAINERS ///////////////////////////////////////////////
-    var tcont = document.getElementById("notationContainersOuterDiv");
+    eventGoFrets.push(t_eventGoFretSet); // [mesh, matl]
+  }
+
+  // NOTATION CONTAINERS ///////////////////////////////////////////////
+  var tcont = document.getElementById("notationContainersOuterDiv");
+  var tcont_bb = tcont.getBoundingClientRect();
+  var tcontW = tcont_bb.width;
+  var tcontH = tcont_bb.height;
+  var tcontCtr = tcontW / 2;
+  //find leftmost track location (will be the most negative or lowest)
+  var t_trLx = 0;
+  for (var i = 1; i < trLoc.length; i++) {
+    if (trLoc[i] < t_trLx) {
+      t_trLx = trLoc[i];
+    }
+  }
+  // left margin is the center of the notation outer div + the left most track
+  // as the tracks are measured from the center
+  var t_leftMargin = tcontCtr + t_trLx - (GOFRETWIDTH / 2);
+  //the gap between notation containers will be the spacebetween tracks - the width of the container
+  // css does this annoying thing where the new x of each subsequent container
+  // is the right edge of the last container
+  // var t_gap = SPACE_BETWEEN_TRACKS - GOFRETWIDTH; //should be this (50) but it isn't
+  var t_gap = 58;
+  // I think the notation outer div and the threejs scene are not quite the same width
+  // so need a slight offset
+  var t_offset = -17;
+  for (var i = 0; i < NUMTRACKS; i++) {
     var tsvgCanvas = document.createElementNS(SVG_NS, "svg");
     tsvgCanvas.setAttributeNS(null, "width", GOFRETWIDTH.toString());
     tsvgCanvas.setAttributeNS(null, "height", NOTATION_CONTAINER_H.toString());
     tsvgCanvas.setAttributeNS(null, "id", "notationSVGcont" + i.toString());
-    var trMargin = 41;
-    var ttrgap = 45;
-    var txloc = (ttrgap * i) + trMargin;
-    tsvgCanvas.setAttributeNS(null, "transform", "translate(" + txloc.toString() + ", 0)");
-    tsvgCanvas.setAttributeNS(null, "class", "notationCanvas");
+    var t_x = t_leftMargin + (t_gap * i) + t_offset;
+    tsvgCanvas.setAttributeNS(null, "transform", "translate(" + t_x.toString() + ", 0)");
     tsvgCanvas.style.backgroundColor = "white";
     tcont.appendChild(tsvgCanvas);
-    notationContainers.push(tsvgCanvas);
-  // }
-
-
-  for (var i = 0; i < notationContainers.length; i++) {
-    notationContainerDOMs.push(document.getElementById(notationContainers[i].id));
+    notationContainerDOMs.push(tsvgCanvas);
+    // TEXT LABELS ///////////////////////////////////////////////
+    var t_txY = NOTATION_CONTAINER_H - 15;
+    var lbl_ob = document.createElementNS(SVG_NS, 'text');
+    lbl_ob.setAttribute('x', '10');
+    lbl_ob.setAttribute('y', t_txY.toString());
+    lbl_ob.setAttribute('fill', 'black');
+    lbl_ob.setAttributeNS(null, "id", 'ob_lbl');
+    lbl_ob.textContent = trLabels[i];
+    notationContainerDOMs[i].appendChild(lbl_ob);
   }
-
-
-  // TEXT LABELS ///////////////////////////////////////////////
-  var text = document.createElementNS(SVG_NS, 'text');
-  text.setAttribute('x', '10');
-  text.setAttribute('y', '20');
-  text.setAttribute('fill', '#000');
-  text.textContent = '2';
-
-
-
   // MAKE ALL NOTATION SVGS /////////////////////////////////////////////////////////////
-  var notationCont_boundingBox = notationContainers[0].getBoundingClientRect();
+  var notationCont_boundingBox = notationContainerDOMs[0].getBoundingClientRect();
   var notationContW = notationCont_boundingBox.width;
   var notationContH = notationCont_boundingBox.height;
   notationCanvasH = notationContH * 0.6666666667;
   var notationContCenterX = notationContW / 2;
   var notationContCenterY = notationContH / 2;
   if (typeof notationElementDictByElementByPart !== 'undefined') {
-    // the variable is defined
     for (const [key, value] of Object.entries(notationElementDictByElementByPart)) {
       var t_notationSVGs = [];
       for (var j = 0; j < value.length; j++) {
@@ -291,31 +331,31 @@ function createScene() {
   }
   // PITCHES SVGS ///////////////////////////////////////////////////////////
   if (typeof pitchSetDictByPSByPart !== 'undefined') {
-  for (const [key, value] of Object.entries(pitchSetDictByPSByPart)) {
-    var t_notationSVGs = [];
-    for (var j = 0; j < value.length; j++) {
-      var t_notationSVG = document.createElementNS(SVG_NS, "image");
-      t_notationSVG.setAttributeNS(SVG_XLINK, 'xlink:href', value[j][1]);
-      t_notationSVGw = notationContW.toString() * 0.5;
-      t_notationSVG.setAttributeNS(null, 'width', t_notationSVGw.toString());
-      var t_svgH = notationContH * 0.3333333;
-      t_notationSVG.setAttributeNS(null, 'height', t_svgH.toString());
-      var t_pitchX = notationContCenterX - (t_notationSVGw / 2);
-      var t_pitchY = notationContH * 0.67;
-      t_notationSVG.setAttributeNS(null, "transform", "translate(" + t_pitchX.toString() + "," + t_pitchY.toString() + ")");
-      t_notationSVG.setAttributeNS(null, "id", key + j.toString());
-      t_notationSVG.setAttributeNS(null, 'visibility', 'visible');
-      t_notationSVGs.push(t_notationSVG);
+    for (const [key, value] of Object.entries(pitchSetDictByPSByPart)) {
+      var t_notationSVGs = [];
+      for (var j = 0; j < value.length; j++) {
+        var t_notationSVG = document.createElementNS(SVG_NS, "image");
+        t_notationSVG.setAttributeNS(SVG_XLINK, 'xlink:href', value[j][1]);
+        t_notationSVGw = notationContW.toString() * 0.5;
+        t_notationSVG.setAttributeNS(null, 'width', t_notationSVGw.toString());
+        var t_svgH = notationContH * 0.3333333;
+        t_notationSVG.setAttributeNS(null, 'height', t_svgH.toString());
+        var t_pitchX = notationContCenterX - (t_notationSVGw / 2);
+        var t_pitchY = notationContH * 0.67;
+        t_notationSVG.setAttributeNS(null, "transform", "translate(" + t_pitchX.toString() + "," + t_pitchY.toString() + ")");
+        t_notationSVG.setAttributeNS(null, "id", key + j.toString());
+        t_notationSVG.setAttributeNS(null, 'visibility', 'visible');
+        t_notationSVGs.push(t_notationSVG);
+      }
+      dictOfPitchSVGsByPart[key] = t_notationSVGs;
     }
-    dictOfPitchSVGsByPart[key] = t_notationSVGs;
+    // DRAW INITIAL PITCHES FOR EACH TRACK
+    for (var i = 0; i < NUMTRACKS; i++) {
+      var t_img = dictOfPitchSVGsByPart[pitchSets[0]][i];
+      notationContainerDOMs[i].appendChild(t_img);
+      currentPitchesById.push(t_img.id);
+    }
   }
-  // DRAW INITIAL PITCHES FOR EACH TRACK
-  for (var i = 0; i < NUMTRACKS; i++) {
-    var t_img = dictOfPitchSVGsByPart[pitchSets[0]][i];
-    notationContainerDOMs[i].appendChild(t_img);
-    currentPitchesById.push(t_img.id);
-  }
-}
   // CURVES  ///////////////////////////////////////////////////////////
   cresCrvCoords = plot(function(x) {
     return Math.pow(x, 3);
@@ -367,25 +407,20 @@ function createScene() {
     //Make FOLLOWERS
     crvFollowData.push(0.0);
   }
-
-
-*/
-
-
-// FOR FRAME BY FRAME TESTS -------------------------------------------- //
-// document.addEventListener('keydown', function(event) {
-//   if (event.code == 'KeyA') {
-//     fbf()
-//   }
-// });
-// function fbf() {
-//   update(MSPERFRAME);
-//   // draw();
-// }
-// RENDER ///////////////////////////////////////////////
-// var helper = new THREE.CameraHelper(camera);
-// scene.add(helper);
-renderer.render(scene, camera);
+  // FOR FRAME BY FRAME TESTS -------------------------------------------- //
+  // document.addEventListener('keydown', function(event) {
+  //   if (event.code == 'KeyA') {
+  //     fbf()
+  //   }
+  // });
+  // function fbf() {
+  //   update(MSPERFRAME);
+  //   // draw();
+  // }
+  // RENDER ///////////////////////////////////////////////
+  // var helper = new THREE.CameraHelper(camera);
+  // scene.add(helper);
+  renderer.render(scene, camera);
 }
 // FUNCTION: animationEngine --------------------------------------------------------- //
 function animationEngine(timestamp) {

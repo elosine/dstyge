@@ -1,6 +1,10 @@
 // [ goTime, playerNum, eventType,  eventTypeSpecifics]
-
 var eventSet = [];
+// GENERATE SOME TEST POLY RHYTHMS TO SEE WHAT RATIOS WORK
+// FIGURE OUT SAMPLE PLAYBACK WITH EACH PARTIAL A SEPARATE SAMPLE
+
+
+// ACCEL/DECEL TO UNISON OVER TIME
 var vf = 85/60;
 var vi = 67/60;
 var tf = 10.0;
