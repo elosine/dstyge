@@ -2,22 +2,38 @@
 var eventSet = [];
 // GENERATE SOME TEST POLY RHYTHMS TO SEE WHAT RATIOS WORK
 // FIGURE OUT SAMPLE PLAYBACK WITH EACH PARTIAL A SEPARATE SAMPLE
+var tempoSet_001 = [123, 123, 123, 123, 123];
+// [shaker, bottles, handclaps, cowbells, kit]
+var ogInstSet = [0, 1, 2, 3, 4, 5];
+
+function generatePolyrhythm(temposet, instset, startTime, dur) {
+  var t_evtSet = [];
+  for (var i = 0; i < temposet.length; i++) {
+    //convert to seconds per beat
+    var t_secPerBeat = 60 / temposet[i];
+    for (var j = 0; j < 999; j++) {
+      t_evtSet.push([(t_secPerBeat * 1) + startTime, instset[i], 0, -1]);
+      if ((t_secPerBeat * i) > dur) break;
+    }
+  }
+  return t_evtSet;
+}
 
 
 // ACCEL/DECEL TO UNISON OVER TIME
-var vf = 85/60;
-var vi = 67/60;
+var vf = 85 / 60;
+var vi = 67 / 60;
 var tf = 10.0;
 var ti = 1.0;
 var currV = vi;
 
-var a = (vf -vi) / (tf - ti);
+var a = (vf - vi) / (tf - ti);
 
 console.log(a);
-console.log(a + " " + vi  + " " + vf);
-for(var i=0;i<9;i++){
-currV = currV + a;
-console.log(currV);
+console.log(a + " " + vi + " " + vf);
+for (var i = 0; i < 9; i++) {
+  currV = currV + a;
+  console.log(currV);
 }
 
 //each frame calculate the number of beats you moved that frame
