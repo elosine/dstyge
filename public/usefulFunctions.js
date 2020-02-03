@@ -302,6 +302,27 @@ var objToday = new Date(),
 }
 
 
+//FUNCTION playsamp ------------------------------------------------------ //
+function playSamp(audioContext, path, rate) {
+  var source = audioContext.createBufferSource();
+  var request = new XMLHttpRequest();
+  request.open('GET', path, true);
+  request.responseType = 'arraybuffer';
+  request.onload = function() {
+    actx.decodeAudioData(request.response, function(buffer) {
+      source.buffer = buffer;
+      source.connect(audioContext.destination);
+      source.loop = false;
+      source.playbackRate.value = rate;
+      source.start();
+    }, function(e) {
+      console.log('Audio error! ', e);
+    });
+  }
+  request.send();
+}
+
+
 
 
 
