@@ -13,7 +13,7 @@ var delta = 0.0;
 var lastFrameTimeMs = 0.0;
 var pieceClock = 0.0;
 var clockadj = 0.0;
-var leadTime = 13.0;
+var leadTime = 5.0;
 var played = false;
 var startTime = 0;
 // COLORS //////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ var SCENE_H = 720;
 var RUNWAYLENGTH = 2070;
 var RUNWAYLENGTH_FRAMES = RUNWAYLENGTH / PXPERFRAME;
 // TRACKS ///////////////////////////////////////////////////////////////
-var NUMTRACKS = 5;
+var NUMTRACKS = 6;
 var TRACK_X_OFFSET = 800;
 var TRACK_Y_OFFSET = 10;
 var TRACK_DIAMETER = 20;
@@ -198,7 +198,6 @@ function createScene() {
         } else {
           t_trX = (SPACE_BETWEEN_TRACKS * (((i - 1) / 2) + 1)) - halfTr;
           trLoc[i] = t_trX;
-          console.log(trLoc);
         }
       }
     }
