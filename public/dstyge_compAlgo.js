@@ -78,13 +78,13 @@ function generatePolyrhythm(temposet, instset, startTime, dur) {
         case 3: //kit
           if ((j % 4) == 0) {
             var t_nt = t_tc;
-            t_evtSet.push([t_nt, instset[i], 5, "/samples/bassDrum.wav"]);
+            t_evtSet.push([t_nt, instset[i], 5, "/samples/bd.wav"]);
             t_nt = t_nt + t_dot8thDur;
-            t_evtSet.push([t_nt, instset[i], 5, "/samples/bassDrum.wav"]);
+            t_evtSet.push([t_nt, instset[i], 5, "/samples/bd.wav"]);
             t_nt = t_nt + t_secPerBeat;
-            t_evtSet.push([t_nt, instset[i], 5, "/samples/bassDrum.wav"]);
+            t_evtSet.push([t_nt, instset[i], 5, "/samples/bd.wav"]);
             t_nt = t_nt + t_16thDur;
-            t_evtSet.push([t_nt, instset[i], 5, "/samples/bassDrum.wav"]);
+            t_evtSet.push([t_nt, instset[i], 5, "/samples/bd.wav"]);
           }
           break;
         case 4: //cowbell
@@ -92,9 +92,9 @@ function generatePolyrhythm(temposet, instset, startTime, dur) {
             var t_nt = t_tc + t_secPerBeat + t_8thDur;
             t_evtSet.push([t_nt, instset[i], 5, "/samples/cowBell_s1.wav"]);
             t_nt = t_nt + t_8thDur;
-            t_evtSet.push([t_nt, instset[i], 5, "/samples/cowBell_s2.wav"]);
+            t_evtSet.push([t_nt, instset[i], 5, "/samples/cowBell_s1.wav"]);
             t_nt = t_nt + t_dot8thDur;
-            t_evtSet.push([t_nt, instset[i], 5, "/samples/cowBell_s2.wav"]);
+            t_evtSet.push([t_nt, instset[i], 5, "/samples/cowBell_s1.wav"]);
             // t_nt = t_nt + t_dot8thDur + t_secPerBeat;
             // t_evtSet.push([t_nt, instset[i], 5, "/samples/cowBell_s1.wav"]);
             // t_nt = t_nt + t_8thDur;
@@ -106,9 +106,9 @@ function generatePolyrhythm(temposet, instset, startTime, dur) {
           }
           break;
         case 5:
-          // Snare
+          // sn
           if (((j - 1) % 2) == 0) {
-            t_evtSet.push([t_tc, instset[i], 5, "/samples/snare.wav"]);
+            t_evtSet.push([t_tc, instset[i], 5, "/samples/sn.wav"]);
           }
           break;
       }
@@ -191,19 +191,19 @@ function accelToTempo(tiSet, tfSet, instSet, stTi, dur) {
           }
           break;
         case 3: //bass drum
-          if ((j % 16) == 0) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/bassDrum.wav"]);
-          if ((j % 16) == 3) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/bassDrum.wav"]);
-          if ((j % 16) == 7) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/bassDrum.wav"]);
-          if ((j % 16) == 8) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/bassDrum.wav"]);
+          if ((j % 16) == 0) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/bd.wav"]);
+          if ((j % 16) == 3) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/bd.wav"]);
+          if ((j % 16) == 7) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/bd.wav"]);
+          if ((j % 16) == 8) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/bd.wav"]);
           break;
         case 4: //cowbell
           if ((j % 16) == 6) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/cowBell_s1.wav"]);
-          if ((j % 16) == 8) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/cowBell_s2.wav"]);
-          if ((j % 16) == 11) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/cowBell_s2.wav"]);
+          if ((j % 16) == 8) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/cowBell_s1.wav"]);
+          if ((j % 16) == 11) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/cowBell_s1.wav"]);
           break;
         case 5:
-          // Snare
-          if ((j % 8) == 4) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/snare.wav"]);
+          // sn
+          if ((j % 8) == 4) eventSet.push([t_btA[0][j], instSet[i], 5, "/samples/sn.wav"]);
           break;
       }
     }
