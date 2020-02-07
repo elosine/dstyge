@@ -282,23 +282,28 @@ function removeDuplicates(arr) {
 }
 
 var objToday = new Date(),
-	weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
-	dayOfWeek = weekday[objToday.getDay()],
+  weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
+  dayOfWeek = weekday[objToday.getDay()],
   dayNum = objToday.getDay() + 1,
-	domEnder = function() { var a = objToday; if (/1/.test(parseInt((a + "").charAt(0)))) return "th"; a = parseInt((a + "").charAt(1)); return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th" }(),
-	dayOfMonth = objToday + ( objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
-	months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
-	curMonth = months[objToday.getMonth()],
-  monthNum = objToday.getMonth()+1,
-	curYear = objToday.getFullYear(),
-	curHour = objToday.getHours() > 12 ? objToday.getHours() - 12 : (objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours()),
-	curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
-	curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
-	curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+  domEnder = function() {
+    var a = objToday;
+    if (/1/.test(parseInt((a + "").charAt(0)))) return "th";
+    a = parseInt((a + "").charAt(1));
+    return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th"
+  }(),
+  dayOfMonth = objToday + (objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
+  months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+  curMonth = months[objToday.getMonth()],
+  monthNum = objToday.getMonth() + 1,
+  curYear = objToday.getFullYear(),
+  curHour = objToday.getHours() > 12 ? objToday.getHours() - 12 : (objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours()),
+  curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
+  curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
+  curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
 
-  function pad(num, size) {
-    var s = "000000000" + num;
-    return s.substr(s.length-size);
+function pad(num, size) {
+  var s = "000000000" + num;
+  return s.substr(s.length - size);
 }
 
 
@@ -323,7 +328,11 @@ function playSamp(audioContext, path, rate) {
 }
 
 
-
+//sorting numbers
+function sortNumArr(arr) {
+  arr.sort((a, b) => a - b);
+  return arr;
+}
 
 
 

@@ -18,6 +18,7 @@ var played = false;
 var startTime = 0;
 // COLORS //////////////////////////////////////////////////////////////
 var clr_neonMagenta = new THREE.Color("rgb(255, 21, 160)");
+var clr_lightPink = new THREE.Color("rgb(240, 140, 160)");
 var clr_seaGreen = new THREE.Color("rgb(0, 255, 108)");
 var clr_neonBlue = new THREE.Color("rgb(6, 107, 225)");
 var clr_forest = new THREE.Color("rgb(11, 102, 35)");
@@ -28,6 +29,7 @@ var clr_yellow = new THREE.Color("rgb(255, 255, 0)");
 var clr_orange = new THREE.Color("rgb(255, 128, 0)");
 var clr_red = new THREE.Color("rgb(255, 0, 0)");
 var clr_purple = new THREE.Color("rgb(255, 0, 255)");
+var clr_turquoise = new THREE.Color("rgb(0, 255, 255)");
 var clr_neonRed = new THREE.Color("rgb(255, 37, 2)");
 var clr_safetyOrange = new THREE.Color("rgb(255, 103, 0)");
 var clr_green = new THREE.Color("rgb(0, 255, 0)");
@@ -57,7 +59,7 @@ for (var i = 0; i < NUMTRACKS; i++) {
 }
 // GOFRETS //////////////////////////////////////////////////////////////
 //// Beats //////////////////////////////////
-var GOFRETLENGTH = 32;
+var GOFRETLENGTH = 10;
 var GOFRETHEIGHT = 14;
 var GOFRETPOSZ = (-GOFRETLENGTH / 2) + 1;
 var GOFRETWIDTH = 250;
@@ -74,7 +76,7 @@ for (var i = 0; i < NUMTRACKS; i++) {
   stopGoFretBlink.push(0);
 }
 //// Events //////////////////////////////////
-var EVENTGOFRETLENGTH = 34;
+var EVENTGOFRETLENGTH = 12;
 var EVENTGOFRETHEIGHT = 21;
 var EVENTGOFRETPOSZ = (-EVENTGOFRETLENGTH / 2) + 2;
 var EVENTGOFRETWIDTH = 70;
@@ -93,7 +95,7 @@ var notationContainerDOMs = [];
 var NOTATION_CONTAINER_H = 350.0;
 var dictOfNotationSVGsByPart = {};
 var currentNotationById = [];
-var trLabels = ["Shaker", "Bottles", "HandClap", "Cow Bells", "Kit"];
+var trLabels = ["Shaker", "Bottles", "Hand Clap", "Bass Drum", "Cow Bells", "Snare"];
 // EVENTS ////////////////////////////////////////////////////////////////
 var eventMatrix = [];
 //// Beat Markers //////////////////////////////////
@@ -175,6 +177,7 @@ function createScene() {
   var trmatl = new THREE.MeshLambertMaterial({
     color: 0x708090
   });
+  //Position tracks on x-axis and add locatons to trLoc array
   for (var i = 0; i < NUMTRACKS; i++) {
     var t_trX;
     var halfTr = SPACE_BETWEEN_TRACKS / 2;
@@ -230,7 +233,8 @@ function createScene() {
     scene.add(tTr);
 
   }
-
+  //sort trLoc so tracks are in left to right order
+  trLoc.sort((a, b) => a - b);
   for (var i = 0; i < NUMTRACKS; i++) {
     // GO FRETS ////////////////////////////////////////////////////////////////////////////
     //// BEAT GO INDICATOR ////////////////////////////////////////
@@ -268,12 +272,7 @@ function createScene() {
   var tcontH = tcont_bb.height;
   var tcontCtr = tcontW / 2;
   //find leftmost track location (will be the most negative or lowest)
-  var t_trLx = 0;
-  for (var i = 1; i < trLoc.length; i++) {
-    if (trLoc[i] < t_trLx) {
-      t_trLx = trLoc[i];
-    }
-  }
+  var t_trLx = trLoc[0];
   // left margin is the center of the notation outer div + the left most track
   // as the tracks are measured from the center
   var t_leftMargin = tcontCtr + t_trLx - (GOFRETWIDTH / 2);
@@ -537,6 +536,12 @@ function update(aMSPERFRAME) {
             cresCrvFollowers[t_playerNum].setAttributeNS(null, "visibility", "hidden");
             cresCrvRects[t_playerNum].setAttributeNS(null, "visibility", "hidden");
             break;
+          case 6: //16ths
+            goFretBlink[t_playerNum] = framect + 7;
+            break;
+          case 7: //half notes
+            goFretBlink[t_playerNum] = framect + 15;
+            break;
           default:
         }
         scene.remove(scene.getObjectByName(t_mesh.name));
@@ -655,6 +660,26 @@ function createEvents() {
         break;
       case 5: // Samples ---------------------------------------------------------------------
         var t_mesh = -1;
+        break;
+      case 6: // 16ths ---------------------------------------------------------------------
+        var t_beatMarkerMatl = new THREE.MeshLambertMaterial({
+          color: clr_lightPink
+        });
+        var t_mesh = new THREE.Mesh(beatMarkerGeom, t_beatMarkerMatl);
+        t_mesh.position.z = t_startZ;
+        t_mesh.position.y = GOFRETHEIGHT;
+        t_mesh.position.x = trLoc[t_playerNum];
+        t_mesh.name = t_eventIx + "_16th";
+        break;
+      case 7: // half-notes ---------------------------------------------------------------------
+        var t_beatMarkerMatl = new THREE.MeshLambertMaterial({
+          color: clr_turquoise
+        });
+        var t_mesh = new THREE.Mesh(beatMarkerGeom, t_beatMarkerMatl);
+        t_mesh.position.z = t_startZ;
+        t_mesh.position.y = GOFRETHEIGHT;
+        t_mesh.position.x = trLoc[t_playerNum];
+        t_mesh.name = t_eventIx + "_halfnotes";
         break;
       default:
     }
