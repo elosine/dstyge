@@ -542,6 +542,9 @@ function update(aMSPERFRAME) {
           case 7: //half notes
             goFretBlink[t_playerNum] = framect + 15;
             break;
+          case 8: // Notation events
+            eventGoFretBlink[t_playerNum] = framect + 11;
+            break;
           default:
         }
         scene.remove(scene.getObjectByName(t_mesh.name));
@@ -680,6 +683,16 @@ function createEvents() {
         t_mesh.position.y = GOFRETHEIGHT;
         t_mesh.position.x = trLoc[t_playerNum];
         t_mesh.name = t_eventIx + "_halfnotes";
+        break;
+      case 8: // New Event ------------------------------------------------------------------
+        var t_eventMarkerMatl = new THREE.MeshLambertMaterial({
+          color: clr_seaGreen
+        });
+        var t_mesh = new THREE.Mesh(eventGoFretGeom, t_eventMarkerMatl);
+        t_mesh.position.z = t_startZ;
+        t_mesh.position.y = EVENTGOFRETHEIGHT;
+        t_mesh.position.x = trLoc[t_playerNum];
+        t_mesh.name = t_eventIx + "_newevent";
         break;
       default:
     }
