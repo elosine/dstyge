@@ -1,13 +1,55 @@
 // INSTRUMENTS: 0-shaker 1-bottles 2-handclap 3-bassdrum 4-cowbells 5-snare
+var lazyCaterer = [7, 11, 16, 22, 29, 37, 46, 56, 67]; //base 21/7
+var lazyCatererBase = 21.0 / 7.0;
+var lazyCatererBPM = [];
+for (var i = 0; i < lazyCaterer.length; i++) {
+  lazyCatererBPM.push(lazyCaterer[i] * lazyCatererBase);
+}
+var fourDLattice = [5,9,11,16,19,20,25,29,31,36];
+var fourDLatticeBase = 21.0 / 5.0;
+var fourDLatticeBPM = [];
+for (var i = 0; i < fourDLattice.length; i++) {
+  fourDLatticeBPM.push(fourDLattice[i] * fourDLatticeBase);
+}
+var leroyQuet = [7,13,17,19,23,41,31];
+var leroyQuetBase = 21.0 / 7.0;
+var leroyQuetBPM = [];
+for (var i = 0; i < leroyQuet.length; i++) {
+  leroyQuetBPM.push(leroyQuet[i] * leroyQuetBase);
+}
+var xenharmonic = [ (14/13), (13/12), (15/13), (13/11), (16/13),
+  (13/10), (18/13), (13/9), (20/13), (13/8), (22/13), (26/15),
+  (24/13), (13/7) ];
 var eventSet = [];
-var startingTempi = [13, 150, 36, 110, 40, 77];
-var players = [0, 1, 2, 3, 4, 5];
-generateAccel2Unison(startingTempi, 50, players, 1, 30);
-for (var i = 0; i < players.length; i++) {
-  generateOneTempo(50, players[i], 31, 30);
+var insts = [0, 1, 2, 3, 4, 5];
+// SEC1 - UNISON AT 123 FOR 8 BARS OR 3.902 SECONDS
+var t_32bts = beats2seconds(123, 32);
+var sec1end = [];
+for (var i = 0; i < insts.length; i++) {
+  sec1end.push(generateOneTempo(123, insts[i], 0, t_32bts));
+}
+// SEC2 - accel/decel to lazycaterer
+var sec2end = [];
+var s2tempiA = lazyCatererBPM.clone();
+shuffle(s2tempiA);
+var s2tempi = s2tempiA.slice(0, 6);
+for (var i = 0; i < insts.length; i++) {
+  sec2end.push(generateAccel(123, s2tempi[i], insts[i], sec1end[0], 18));
 }
 
 
+// var startingTempi = [13, 150, 36, 110, 40, 77];
+// var players = [0, 1, 2, 3, 4, 5];
+// generateAccel2Unison(startingTempi, 50, players, 1, 30);
+// for (var i = 0; i < players.length; i++) {
+//   generateOneTempo(50, players[i], 31, 30);
+// }
+// FUNCTION: generateAccel2Unison -------------------------------------------------------- //
+function beats2seconds(bpm, numbts) {
+  var t_secPerBeat = 1.0 / (bpm / 60.0);
+  return t_secPerBeat * numbts;
+}
+// FUNCTION: generateAccel2Unison -------------------------------------------------------- //
 function generateAccel2Unison(iTempoSet, fTempo, playerSet, stTi, dur) {
   var t_fud = [];
   for (var i = 0; i < playerSet.length; i++) {
