@@ -5,23 +5,26 @@ var lazyCatererBPM = [];
 for (var i = 0; i < lazyCaterer.length; i++) {
   lazyCatererBPM.push(lazyCaterer[i] * lazyCatererBase);
 }
-var fourDLattice = [5,9,11,16,19,20,25,29,31,36];
+var fourDLattice = [5, 9, 11, 16, 19, 20, 25, 29, 31, 36];
 var fourDLatticeBase = 21.0 / 5.0;
 var fourDLatticeBPM = [];
 for (var i = 0; i < fourDLattice.length; i++) {
   fourDLatticeBPM.push(fourDLattice[i] * fourDLatticeBase);
 }
-var leroyQuet = [7,13,17,19,23,41,31];
+var leroyQuet = [7, 13, 17, 19, 23, 41, 31];
 var leroyQuetBase = 21.0 / 7.0;
 var leroyQuetBPM = [];
 for (var i = 0; i < leroyQuet.length; i++) {
   leroyQuetBPM.push(leroyQuet[i] * leroyQuetBase);
 }
-var xenharmonic = [ (14/13), (13/12), (15/13), (13/11), (16/13),
-  (13/10), (18/13), (13/9), (20/13), (13/8), (22/13), (26/15),
-  (24/13), (13/7) ];
+var xenharmonic = [(14 / 13), (13 / 12), (15 / 13), (13 / 11), (16 / 13),
+  (13 / 10), (18 / 13), (13 / 9), (20 / 13), (13 / 8), (22 / 13), (26 / 15),
+  (24 / 13), (13 / 7)
+];
 var eventSet = [];
 var insts = [0, 1, 2, 3, 4, 5];
+
+
 // SEC1 - UNISON AT 123 FOR 8 BARS OR 3.902 SECONDS
 var t_32bts = beats2seconds(123, 32);
 var sec1end = [];
@@ -36,32 +39,47 @@ var s2tempi = s2tempiA.slice(0, 6);
 for (var i = 0; i < insts.length; i++) {
   sec2end.push(generateAccel(123, s2tempi[i], insts[i], sec1end[0], 18));
 }
+// SEC3 - lazycaterer  for 5 sec
+var sec3end = [];
+for (var i = 0; i < insts.length; i++) {
+  sec3end.push(generateOneTempo(s2tempi[i], insts[i], sec2end[i], 5));
+}
+// SEC 4 - TO UNISON 42BPM IN 13SEC
+//find latest endTime
+var lastSec3end = sec3end.clone();
+lastSec3end.sort();
+var sec4dur = 23;
+var sec4end = lastSec3end[lastSec3end.length-1] + sec4dur;
+generateAccel2Unison(s2tempi, 42, insts, sec3end, sec4end);
 
-
-// var startingTempi = [13, 150, 36, 110, 40, 77];
-// var players = [0, 1, 2, 3, 4, 5];
-// generateAccel2Unison(startingTempi, 50, players, 1, 30);
-// for (var i = 0; i < players.length; i++) {
-//   generateOneTempo(50, players[i], 31, 30);
-// }
+/*
+MAKE BEATS AT END UP TO BEAT AFTER LAST
+FIND WAY TO CALCULATE PRECISE NUMBER OF BEATS AROUND A DURATION
+FIGURE OUT WAY TO DO ACCEL2UNISON WITH VARIABLE STARTING TIME
+  DO STARTTIME AND ENDTIME AND CALCULATE DUR
+*/
 // FUNCTION: generateAccel2Unison -------------------------------------------------------- //
 function beats2seconds(bpm, numbts) {
   var t_secPerBeat = 1.0 / (bpm / 60.0);
   return t_secPerBeat * numbts;
 }
 // FUNCTION: generateAccel2Unison -------------------------------------------------------- //
-function generateAccel2Unison(iTempoSet, fTempo, playerSet, stTi, dur) {
+function generateAccel2Unison(iTempoSet, fTempo, playerSet, startTimeSet, endTime) {
+  var t_btsAfterLast = [];
   var t_fud = [];
   for (var i = 0; i < playerSet.length; i++) {
-    t_fud.push(accel2UnisonFudge(iTempoSet[i], fTempo, playerSet[i], stTi, dur));
+    t_fud.push(accel2UnisonFudge(iTempoSet[i], fTempo, playerSet[i], startTimeSet[i], endTime));
   }
   for (var i = 0; i < playerSet.length; i++) {
-    generateAccel2UnisonA(iTempoSet[i], fTempo, playerSet[i], stTi, dur, t_fud[i]);
+    t_btsAfterLast.push(generateAccel2UnisonA(iTempoSet[i], fTempo, playerSet[i], startTimeSet[i], endTime, t_fud[i]));
   }
+  return t_btsAfterLast;
 }
 // FUNCTION: generateAccel ------------------------------------------------------------- //
-function generateAccel2UnisonA(iTempo, fTempo, pNum, stTi, dur, addPerMS) {
+function generateAccel2UnisonA(iTempo, fTempo, pNum, stTi, endTime, addPerMS) {
   var t_wholeBeats = [];
+  var t_btsAfterLast = [];
+  var dur = endTime - stTi;
   var t_iVms = (iTempo / 60000.0);
   var t_fVms = (fTempo / 60000.0);
   var t_dV = t_fVms - t_iVms;
@@ -113,14 +131,16 @@ function generateAccel2UnisonA(iTempo, fTempo, pNum, stTi, dur, addPerMS) {
       var t_postBeats = t_bts - t_lastBt;
       if (t_postBeats >= 1) {
         t_wholeBeats.push(t_currT);
+        t_btsAfterLast.push(t_currT);
         break;
       }
     }
   }
-  return t_wholeBeats;
+  return t_btsAfterLast;
 }
 // FUNCTION: generateAccel ------------------------------------------------------------- //
-function accel2UnisonFudge(iTempo, fTempo, pNum, stTi, dur) {
+function accel2UnisonFudge(iTempo, fTempo, pNum, stTi, endTime) {
+  var dur = endTime - stTi;
   var t_wholeBeats = [];
   var t_btAfterLast;
   var t_iVms = (iTempo / 60000.0);
@@ -164,6 +184,7 @@ function accel2UnisonFudge(iTempo, fTempo, pNum, stTi, dur) {
 }
 // FUNCTION: generateAccel ------------------------------------------------------------- //
 function generateAccel(iTempo, fTempo, pNum, stTi, dur) {
+  var t_btAfterLast;
   var t_iVms = (iTempo / 60000.0);
   var t_fVms = (fTempo / 60000.0);
   var t_dV = t_fVms - t_iVms;
@@ -172,40 +193,51 @@ function generateAccel(iTempo, fTempo, pNum, stTi, dur) {
   var t_dT = Math.round(t_dTfloat);
   var t_bts = 0;
   var t_num16 = 0;
+  var t_lastBts;
   //Add first beats
   eventSet.push([stTi, pNum, 8, -1]);
   eventSet.push([stTi, pNum, 0, -1]);
   motivePlayer(pNum, t_num16, stTi);
   //make array of 16th notes
-  for (var j = 0; j < t_dT; j++) {
+  for (var j = 0; j < (t_dT + 100000); j++) {
     var t_currT = stTi + (j / 1000.0);
     var t_nV = t_iVms + (t_a * j);
     var t_currbpm = t_nV * 60000;
     t_bts = t_bts + t_nV;
     var t_fl16bts = floorByStep(t_bts, 0.25) - (t_num16 * 0.25);
-    if (t_fl16bts == 0.25) {
-      t_num16++;
-      //whole beats
-      if ((t_num16 % 4) == 0 && t_num16 > 0) {
-        eventSet.push([t_currT, pNum, 0, -1]);
-      }
-      // if tempo is > 130bpm then draw half notes
-      if (t_currbpm > 130) {
-        if ((t_num16 % 8) == 0 && t_num16 > 0) {
-          eventSet.push([t_currT, pNum, 7, -1]);
+    if (j < t_dT) {
+      if (t_fl16bts == 0.25) {
+        t_num16++;
+        //whole beats
+        if ((t_num16 % 4) == 0 && t_num16 > 0) {
+          eventSet.push([t_currT, pNum, 0, -1]);
+          t_lastBt = t_bts;
         }
-      }
-      // if tempo is < 45 then draw 16ths
-      if (t_currbpm < 60) {
-        //don't draw on the beat just partials 2-4
-        if ((t_num16 % 4) != 0) {
-          eventSet.push([t_currT, pNum, 6, -1]);
+        // if tempo is > 130bpm then draw half notes
+        if (t_currbpm > 130) {
+          if ((t_num16 % 8) == 0 && t_num16 > 0) {
+            eventSet.push([t_currT, pNum, 7, -1]);
+          }
         }
+        // if tempo is < 45 then draw 16ths
+        if (t_currbpm < 60) {
+          //don't draw on the beat just partials 2-4
+          if ((t_num16 % 4) != 0) {
+            eventSet.push([t_currT, pNum, 6, -1]);
+          }
+        }
+        //Play samples
+        motivePlayer(pNum, t_num16, t_currT);
       }
-      //Play samples
-      motivePlayer(pNum, t_num16, t_currT);
+    } else {
+      var t_postBeats = t_bts - t_lastBt;
+      if (t_postBeats >= 1) {
+        t_btAfterLast = t_currT;
+        break;
+      }
     }
   }
+  return t_btAfterLast;
 }
 // FUNCTION: generateOneTempo ------------------------------------------------------------- //
 function generateOneTempo(tempo, instNum, startTime, dur) {
