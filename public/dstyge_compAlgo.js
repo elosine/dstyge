@@ -23,8 +23,16 @@ var xenharmonic = [(14 / 13), (13 / 12), (15 / 13), (13 / 11), (16 / 13),
 ];
 var eventSet = [];
 var insts = [0, 1, 2, 3, 4, 5];
-
-
+var bts8 = beats2seconds(60, 8);
+var bpm110_8b = beats2seconds(110, 7);
+console.log(bpm110_8b);
+var e1 = generateOneTempo(60, 1, 0, bts8);
+var e2end = bpm110_8b + e1;
+var e2 = generateOneTempo(110, 1, e1, e2end);
+console.log(e2);
+console.log(eventSet);
+console.log(e2end);
+/*
 // SEC1 - UNISON AT 123 FOR 8 BARS OR 3.902 SECONDS
 var t_32bts = beats2seconds(123, 32);
 var sec1end = [];
@@ -49,8 +57,10 @@ for (var i = 0; i < insts.length; i++) {
 var lastSec3end = sec3end.clone();
 lastSec3end.sort();
 var sec4dur = 23;
-var sec4end = lastSec3end[lastSec3end.length-1] + sec4dur;
+var sec4end = lastSec3end[lastSec3end.length - 1] + sec4dur;
 generateAccel2Unison(s2tempi, 42, insts, sec3end, sec4end);
+
+*/
 
 /*
 MAKE BEATS AT END UP TO BEAT AFTER LAST
@@ -183,7 +193,8 @@ function accel2UnisonFudge(iTempo, fTempo, pNum, stTi, endTime) {
   return fudgePerMs;
 }
 // FUNCTION: generateAccel ------------------------------------------------------------- //
-function generateAccel(iTempo, fTempo, pNum, stTi, dur) {
+function generateAccel(iTempo, fTempo, pNum, stTi, endTime) {
+  var dur = endTime - stTi;
   var t_btAfterLast;
   var t_iVms = (iTempo / 60000.0);
   var t_fVms = (fTempo / 60000.0);
@@ -195,7 +206,7 @@ function generateAccel(iTempo, fTempo, pNum, stTi, dur) {
   var t_num16 = 0;
   var t_lastBts;
   //Add first beats
-  eventSet.push([stTi, pNum, 8, -1]);
+  eventSet.push([stTi, pNum, 8, -1]); //new event marker
   eventSet.push([stTi, pNum, 0, -1]);
   motivePlayer(pNum, t_num16, stTi);
   //make array of 16th notes
@@ -231,60 +242,97 @@ function generateAccel(iTempo, fTempo, pNum, stTi, dur) {
       }
     } else {
       var t_postBeats = t_bts - t_lastBt;
-      if (t_postBeats >= 1) {
+      if (t_postBeats < 1) {
+        if (t_fl16bts == 0.25) {
+          t_num16++;
+          //whole beats
+          if ((t_num16 % 4) == 0 && t_num16 > 0) {
+            eventSet.push([t_currT, pNum, 0, -1]);
+            t_lastBt = t_bts;
+          }
+          // if tempo is > 130bpm then draw half notes
+          if (t_currbpm > 130) {
+            if ((t_num16 % 8) == 0 && t_num16 > 0) {
+              eventSet.push([t_currT, pNum, 7, -1]);
+            }
+          }
+          // if tempo is < 45 then draw 16ths
+          if (t_currbpm < 60) {
+            //don't draw on the beat just partials 2-4
+            if ((t_num16 % 4) != 0) {
+              eventSet.push([t_currT, pNum, 6, -1]);
+            }
+          }
+          //Play samples
+          motivePlayer(pNum, t_num16, t_currT);
+        }
+      } else {
         t_btAfterLast = t_currT;
         break;
+
       }
     }
   }
   return t_btAfterLast;
 }
 // FUNCTION: generateOneTempo ------------------------------------------------------------- //
-function generateOneTempo(tempo, instNum, startTime, dur) {
+function generateOneTempo(tempo, instNum, startTime, endTime) {
   var t_nextBeat;
-  var t_durMS = Math.round(dur * 1000.0);
-  // var msPer16th = Math.round( ((60.0 / tempo) / 1000.0) / 4.0 );
-  var t_tcSecPerBeat = 60.0 / tempo;
-  var t_msPer16th = Math.round((t_tcSecPerBeat * 1000.0) / 4.0);
+  var t_durSec = endTime - startTime;
+  var t_durMS = Math.round(t_durSec * 1000.0);
+  var t_secPerBeat = 60.0 / tempo;
+  var t_msPer16th = Math.round((t_secPerBeat * 1000.0) / 4.0);
   var t_msPerBeat = t_msPer16th * 4;
   var t_lastB;
   var t_16ct = 0;
-  // Generate Beat Markers and report beat after last
+  //add eventMarker
+  eventSet.push([startTime, instNum, 8, -1]);
   //examine each millisecond
-  for (var i = 0; i < t_durMS; i++) {
-    if (i == 0) {
-      eventSet.push([startTime, instNum, 8, -1]);
-    }
-    //on the beat
-    if ((i % t_msPerBeat) == 0) {
-      var t_tcSec = (i / 1000.0) + startTime;
-      eventSet.push([t_tcSec, instNum, 0, -1]);
-      t_lastB = t_tcSec;
-    }
-    // if tempo is > 130bpm then draw half notes
-    if (tempo > 130) {
-      if ((i % (t_msPerBeat * 2)) == 0) {
-        var t_tcSec = (i / 1000.0) + startTime;
-        eventSet.push([t_tcSec, instNum, 7, -1]);
+  for (var i = 0; i < (t_durMS + 10000); i++) {
+    var t_tc = (i / 1000.0) + startTime;
+    if (i < t_durMS) {
+      //add beat markers on the beat
+      if ((i % t_msPerBeat) == 0) {
+        eventSet.push([t_tc, instNum, 0, -1]);
+        t_lastB = t_tc; //to calculate beat after last
       }
-    }
-    // if tempo is < 45 then draw 16ths
-    if (tempo < 60) {
-      //don't draw on the beat just partials 2-4
-      if ((i % t_msPer16th) == 0 && (i % t_msPerBeat) != 0) {
-        var t_tcSec = (i / 1000.0) + startTime;
-        eventSet.push([t_tcSec, instNum, 6, -1]);
+      // if tempo is > 130bpm then draw half notes
+      if (tempo > 130) {
+        if ((i % (t_msPerBeat * 2)) == 0) {
+          eventSet.push([t_tc, instNum, 7, -1]);
+        }
       }
-    }
-    //Report next beat after last
-    if (i == (t_durMS - 1)) {
-      t_nextBeat = t_lastB + t_tcSecPerBeat;
-    }
-    //Play samples
-    if ((i % t_msPer16th) == 0) {
-      var t_tcSec = (i / 1000.0) + startTime;
-      motivePlayer(instNum, t_16ct, t_tcSec);
-      t_16ct++;
+      // if tempo is < 45 then draw 16ths
+      if (tempo < 60) {
+        //don't draw on the beat just partials 2-4
+        if ((i % t_msPer16th) == 0 && (i % t_msPerBeat) != 0) {
+          eventSet.push([t_tc, instNum, 6, -1]);
+        }
+      }
+      //Play samples
+      if ((i % t_msPer16th) == 0) {
+        motivePlayer(instNum, t_16ct, t_tc);
+        t_16ct++;
+      }
+    } else {
+      var t_postBeats = i - t_lastB;
+      if (t_postBeats < 1) {
+        // if tempo is < 45 then draw 16ths
+        if (tempo < 60) {
+          //don't draw on the beat just partials 2-4
+          if ((i % t_msPer16th) == 0 && (i % t_msPerBeat) != 0) {
+            eventSet.push([t_tc, instNum, 6, -1]);
+          }
+        }
+        //Play samples
+        if ((i % t_msPer16th) == 0) {
+          motivePlayer(instNum, t_16ct, t_tc);
+          t_16ct++;
+        }
+      } else {
+        t_nextBeat = t_tc;
+        break;
+      }
     }
   }
   return t_nextBeat;
