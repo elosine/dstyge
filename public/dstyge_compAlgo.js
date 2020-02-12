@@ -29,8 +29,125 @@ var insts = [0, 1, 2, 3, 4, 5];
 // var t_et02 = singleTempoGenerator_numBeats(110.672, 1, t_et01, 8);
 // var t_et03 = singleTempoGenerator_numBeats(22.81, 1, t_et02, 8);
 // var t_et04 = singleTempoGenerator_numBeats(187.341, 1, t_et03, 16);
-console.log(eventSet);
-//write function to find num of beats for an acceleration
+
+
+var ta = accelFindClosestBeat(40, 101, 1, 2.78, 15.558);
+console.log(ta);
+console.log(accelFixed(40, 101, 1, 2.78, ta[0][1], ta[0][2]));
+
+
+// FUNCTION: singleTempoGenerator_numBeats ------------------------------------------------------------- //
+function accelFixed(itempo, ftempo, instNum, startTime, endTime, accel) {
+  var t_1stBeat_beatsSet = [];
+  var t_beatsSet = [];
+  var t_iVms = (itempo / 60000.0);
+  var t_fVms = (ftempo / 60000.0);
+  var t_dV = t_fVms - t_iVms;
+  var t_dTmsFloat = (endTime - startTime) * 1000.0;
+  var t_a = accel;
+  var t_dTms = Math.ceil(t_dTmsFloat);
+  var t_btsF = 0;
+  var t_num16 = 0;
+  var t_lastBtF = 0;
+  var t_lastTcSec = 0;
+  var t_beatNum = 0;
+  //First Beat
+  t_beatsSet.push([t_beatNum, startTime]);
+  for (var i = 0; i < (t_dTms + 100000); i++) {
+    var t_tcSec = startTime + (i / 1000.0);
+    var t_nV = t_iVms + (t_a * i);
+    var t_fl16bts = floorByStep(t_btsF, 0.25) - (t_num16 * 0.25);
+    if (i < t_dTms) {
+      if (t_fl16bts == 0.25) {
+        t_num16++;
+        //whole beats
+        if ((t_num16 % 4) == 0 && t_num16 > 0) {
+          t_beatNum++;
+          t_beatsSet.push([t_beatNum, t_tcSec]);
+          t_lastBtF = t_btsF;
+          t_lastTcSec = t_tcSec;
+        }
+      }
+    } else {
+      var t_postBeats = t_btsF - t_lastBtF;
+      if (t_postBeats >= 1) {
+        var t_postBeatDif = t_tcSec - endTime;
+        var t_preBeatDif = endTime - t_lastTcSec;
+        var t_closest = Math.min(t_postBeatDif, t_preBeatDif);
+        if (t_closest == t_postBeatDif) {
+          var t_lastBtNum = t_beatsSet[t_beatsSet.length-1][0] + 1;
+          t_1stBeat_beatsSet.push([t_lastBtNum, t_tcSec]);
+        } else {
+          var t_lastBtNum = t_beatsSet[t_beatsSet.length-1][0];
+          t_1stBeat_beatsSet.push([t_lastBtNum, t_lastTcSec, t_a]);
+        }
+        t_1stBeat_beatsSet.push(t_beatsSet);
+        break;
+      }
+    }
+    t_btsF = t_btsF + t_nV;
+    // console.log(t_btsF);
+  }
+  return t_1stBeat_beatsSet;
+}
+
+// FUNCTION: singleTempoGenerator_numBeats ------------------------------------------------------------- //
+function accelFindClosestBeat(itempo, ftempo, instNum, startTime, endTime) {
+  var t_1stBeat_beatsSet = [];
+  var t_beatsSet = [];
+  var t_iVms = (itempo / 60000.0);
+  var t_fVms = (ftempo / 60000.0);
+  var t_dV = t_fVms - t_iVms;
+  var t_dTmsFloat = (endTime - startTime) * 1000.0;
+  var t_a = t_dV / t_dTmsFloat;
+  var t_dTms = Math.ceil(t_dTmsFloat);
+  var t_btsF = 0;
+  var t_num16 = 0;
+  var t_lastBtF = 0;
+  var t_lastTcSec = 0;
+  var t_beatNum = 0;
+  //First Beat
+  t_beatsSet.push([t_beatNum, startTime]);
+  for (var i = 0; i < (t_dTms + 100000); i++) {
+    var t_tcSec = startTime + (i / 1000.0);
+    var t_nV = t_iVms + (t_a * i);
+    var t_fl16bts = floorByStep(t_btsF, 0.25) - (t_num16 * 0.25);
+    if (i < t_dTms) {
+      if (t_fl16bts == 0.25) {
+        t_num16++;
+        //whole beats
+        if ((t_num16 % 4) == 0 && t_num16 > 0) {
+          t_beatNum++;
+          t_beatsSet.push([t_beatNum, t_tcSec]);
+          t_lastBtF = t_btsF;
+          t_lastTcSec = t_tcSec;
+        }
+      }
+    } else {
+      var t_postBeats = t_btsF - t_lastBtF;
+      if (t_postBeats >= 1) {
+        var t_postBeatDif = t_tcSec - endTime;
+        var t_preBeatDif = endTime - t_lastTcSec;
+        var t_closest = Math.min(t_postBeatDif, t_preBeatDif);
+        if (t_closest == t_postBeatDif) {
+          var t_lastBtNum = t_beatsSet[t_beatsSet.length-1][0] + 1;
+          t_1stBeat_beatsSet.push([t_lastBtNum, t_tcSec]);
+        } else {
+          var t_lastBtNum = t_beatsSet[t_beatsSet.length-1][0];
+          t_1stBeat_beatsSet.push([t_lastBtNum, t_lastTcSec, t_a]);
+        }
+        t_1stBeat_beatsSet.push(t_beatsSet);
+        break;
+      }
+    }
+    t_btsF = t_btsF + t_nV;
+    // console.log(t_btsF);
+  }
+  return t_1stBeat_beatsSet;
+}
+
+
+
 
 // FUNCTION: singleTempoGenerator_numBeats ------------------------------------------------------------- //
 function singleTempoGenerator_numBeats(tempo, instNum, startTime, numBeats) {
