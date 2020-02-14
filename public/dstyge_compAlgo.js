@@ -31,12 +31,34 @@ var insts = [0, 1, 2, 3, 4, 5];
 // var t_et04 = singleTempoGenerator_numBeats(187.341, 1, t_et03, 16);
 
 
-var ta = accelFindClosestBeat(40, 101, 1, 2.78, 15.558);
+var ta = accelFindClosestBeat(61.4, 101, 1, 2.78, 18.558);
 console.log(ta);
-console.log(accelFixed(40, 101, 1, 2.78, ta[0][1], ta[0][2]));
+var t_closestBeatSec = ta[0][3]; //0 if before endtime; 1 if after
+var t_ogAccel = ta[0][2];
+//write get accel function
+var t_accel2 = getAccel(61.4, 101, 2.78, t_closestBeatSec);
 
 
-// FUNCTION: singleTempoGenerator_numBeats ------------------------------------------------------------- //
+/*
+1. run accelFindClosestBeat
+2. run accelFindClosestBeat for beat before time and beat after time
+3. run loop on accelerations between the two until your whole beat lands on og endtime
+4. run fixed accel to that endtime
+Find accel to a fixed time at whole beats
+1. run accelFindClosestBeat to fixed end time
+2. find accel to beat before and beat after
+3. try a number of accels inbetween until you find the one that lands on the beat
+*/
+// FUNCTION: getAccel ------------------------------------------------------------- //
+function getAccel(itempo, ftempo, startTime, endTime) {
+  var t_iVms = (itempo / 60000.0);
+  var t_fVms = (ftempo / 60000.0);
+  var t_dV = t_fVms - t_iVms;
+  var t_dTmsFloat = (endTime - startTime) * 1000.0;
+  var t_a = t_dV / t_dTmsFloat;
+  return t_a;
+}
+// FUNCTION: accelFixed ------------------------------------------------------------- //
 function accelFixed(itempo, ftempo, instNum, startTime, endTime, accel) {
   var t_1stBeat_beatsSet = [];
   var t_beatsSet = [];
@@ -75,10 +97,10 @@ function accelFixed(itempo, ftempo, instNum, startTime, endTime, accel) {
         var t_preBeatDif = endTime - t_lastTcSec;
         var t_closest = Math.min(t_postBeatDif, t_preBeatDif);
         if (t_closest == t_postBeatDif) {
-          var t_lastBtNum = t_beatsSet[t_beatsSet.length-1][0] + 1;
+          var t_lastBtNum = t_beatsSet[t_beatsSet.length - 1][0] + 1;
           t_1stBeat_beatsSet.push([t_lastBtNum, t_tcSec]);
         } else {
-          var t_lastBtNum = t_beatsSet[t_beatsSet.length-1][0];
+          var t_lastBtNum = t_beatsSet[t_beatsSet.length - 1][0];
           t_1stBeat_beatsSet.push([t_lastBtNum, t_lastTcSec, t_a]);
         }
         t_1stBeat_beatsSet.push(t_beatsSet);
@@ -126,28 +148,27 @@ function accelFindClosestBeat(itempo, ftempo, instNum, startTime, endTime) {
     } else {
       var t_postBeats = t_btsF - t_lastBtF;
       if (t_postBeats >= 1) {
+        //find whether the beat after endtime is closer or the beat before endtime
         var t_postBeatDif = t_tcSec - endTime;
         var t_preBeatDif = endTime - t_lastTcSec;
         var t_closest = Math.min(t_postBeatDif, t_preBeatDif);
         if (t_closest == t_postBeatDif) {
-          var t_lastBtNum = t_beatsSet[t_beatsSet.length-1][0] + 1;
-          t_1stBeat_beatsSet.push([t_lastBtNum, t_tcSec]);
+          var t_lastBtNum = t_beatsSet[t_beatsSet.length - 1][0] + 1;
+          t_beatsSet.push([t_lastBtNum, t_tcSec]);
+          // [btNum, timecode, acceleration, whether it is beat before or after endtime]
+          t_1stBeat_beatsSet.push([t_lastBtNum, t_tcSec, t_a, 1]);
         } else {
-          var t_lastBtNum = t_beatsSet[t_beatsSet.length-1][0];
-          t_1stBeat_beatsSet.push([t_lastBtNum, t_lastTcSec, t_a]);
+          var t_lastBtNum = t_beatsSet[t_beatsSet.length - 1][0];
+          t_1stBeat_beatsSet.push([t_lastBtNum, t_lastTcSec, t_a, 0]);
         }
         t_1stBeat_beatsSet.push(t_beatsSet);
         break;
       }
     }
     t_btsF = t_btsF + t_nV;
-    // console.log(t_btsF);
   }
   return t_1stBeat_beatsSet;
 }
-
-
-
 
 // FUNCTION: singleTempoGenerator_numBeats ------------------------------------------------------------- //
 function singleTempoGenerator_numBeats(tempo, instNum, startTime, numBeats) {
@@ -195,41 +216,6 @@ function singleTempo(tempo, instNum, startTime, endTime) {
   }
 }
 
-
-
-
-/*
-  var t_16ct = 0;
-
-
-
-    } else {
-      var t_postBeats = i - t_lastB;
-      if (t_postBeats < 1) {
-        // if tempo is < 45 then draw 16ths
-        if (tempo < 60) {
-          //don't draw on the beat just partials 2-4
-          if ((i % t_msPer16th) == 0 && (i % t_msPerBeat) != 0) {
-            eventSet.push([t_tc, instNum, 6, -1]);
-          }
-        }
-        //Play samples
-        if ((i % t_msPer16th) == 0) {
-          motivePlayer(instNum, t_16ct, t_tc);
-          t_16ct++;
-        }
-      } else {
-        t_nextBeat = t_tc;
-        break;
-      }
-    }
-  }
-  return t_nextBeat;
-*/
-
-
-
-//
 
 // FUNCTION: beats2seconds -------------------------------------------------------- //
 function beats2seconds(bpm, numbts) {
