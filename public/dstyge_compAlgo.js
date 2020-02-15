@@ -30,13 +30,24 @@ var insts = [0, 1, 2, 3, 4, 5];
 // var t_et03 = singleTempoGenerator_numBeats(22.81, 1, t_et02, 8);
 // var t_et04 = singleTempoGenerator_numBeats(187.341, 1, t_et03, 16);
 
-
-var ta = accelFindClosestBeat(61.4, 101, 1, 2.78, 18.558);
+var t_et = 18.558;
+var ta = accelFindClosestBeat(61.4, 101, 1, 2.78, t_et);
 console.log(ta);
-var t_closestBeatSec = ta[0][3]; //0 if before endtime; 1 if after
-var t_ogAccel = ta[0][2];
-//write get accel function
-var t_accel2 = getAccel(61.4, 101, 2.78, t_closestBeatSec);
+var t_maxTime, t_accel1, t_accel2;
+var t_whichBt = ta[0][3];
+var t_closestBtSec = ta[0][1];
+if (t_whichBt == 0) {
+  t_accel1 = getAccel(61.4, 101, 2.78, t_closestBtSec);
+  t_accel2 = ta[0][2];
+  t_maxTime = t_et;
+} else{
+  t_accel1 = ta[0][2];
+  t_accel2 =  getAccel(61.4, 101, 2.78, t_closestBtSec);
+  t_maxTime = ta[0][1];
+}
+
+console.log(t_accel1 + " " + t_accel2);
+console.log(findAccelToMatchBeat(61.4,  t_accel1, t_accel2, 2.78, t_et, t_maxTime));
 
 
 /*
@@ -49,6 +60,36 @@ Find accel to a fixed time at whole beats
 2. find accel to beat before and beat after
 3. try a number of accels inbetween until you find the one that lands on the beat
 */
+
+function findAccelToMatchBeat(itempo, a1, a2, startTime, endTime, maxTime) {
+  var t_accel;
+  var mxTimeMS = (maxTime * 1000.0) + 10;
+  var t_iVms = (itempo / 60000.0);
+  t_num16 = 0;
+  var t_btsF = 0;
+  for (var j = a1; j < a2; j = (j + 0.000000000001)) {
+    for (var i = 0; i < mxTimeMS; i++) {
+      var t_tcSec = startTime + (i / 1000.0);
+      var t_nV = t_iVms + (j * i);//add a little to accell
+      var t_fl16bts = floorByStep(t_btsF, 0.25) - (t_num16 * 0.25);
+        if (t_fl16bts == 0.25) {
+          t_num16++;
+          //whole beats
+          if ((t_num16 % 4) == 0 && t_num16 > 0) {
+            t_lastBtF = t_btsF;
+            var t_tcSecRound = t_tcSec.toFixed(3);
+            var t_eTround = endTime.toFixed(3);
+            if (t_tcSecRound == t_eTround) {
+              t_accel = j;
+              break;
+            }
+          }
+        }
+        t_btsF = t_btsF + t_nV;
+      }
+    }
+  return t_accel;
+}
 // FUNCTION: getAccel ------------------------------------------------------------- //
 function getAccel(itempo, ftempo, startTime, endTime) {
   var t_iVms = (itempo / 60000.0);
