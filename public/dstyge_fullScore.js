@@ -13,7 +13,7 @@ var delta = 0.0;
 var lastFrameTimeMs = 0.0;
 var pieceClock = 0.0;
 var clockadj = 0.0;
-var leadTime = 5.0;
+var leadTime = 4.0;
 var played = false;
 var startTime = 0;
 // COLORS //////////////////////////////////////////////////////////////
