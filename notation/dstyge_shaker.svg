@@ -20,31 +20,122 @@
 <rect transform="translate(5.6906, 9.3707)" x="13.0195" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
 <rect transform="translate(5.6906, 8.3707)" x="13.0195" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
 <rect transform="translate(5.6906, 7.3707)" x="13.0195" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
-<line transform="translate(5.6906, 15.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="15.8147" y2="-0.0000"/>
-<line transform="translate(5.6906, 14.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="15.8147" y2="-0.0000"/>
-<line transform="translate(5.6906, 13.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="15.8147" y2="-0.0000"/>
-<line transform="translate(5.6906, 12.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="15.8147" y2="-0.0000"/>
-<line transform="translate(5.6906, 11.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="15.8147" y2="-0.0000"/>
-<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/dstyge_shaker.ly:16:21:22">
-<path transform="translate(19.0391, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="15.5357" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="15.5357" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="15.5357" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="15.5357" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="18.0518" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="18.0518" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="18.0518" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="18.0518" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="20.5680" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="20.5680" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="20.5680" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="20.5680" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="23.0842" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="23.0842" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="23.0842" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="23.0842" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="25.6004" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="25.6004" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="25.6004" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="25.6004" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="28.1166" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="28.1166" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="28.1166" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="28.1166" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="30.6327" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="30.6327" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="30.6327" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="30.6327" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="33.1489" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="33.1489" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="33.1489" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="33.1489" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="35.6651" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="35.6651" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="35.6651" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="35.6651" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="38.1813" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="38.1813" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="38.1813" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="38.1813" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="40.6974" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="40.6974" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="40.6974" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="40.6974" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 10.3707)" x="43.2136" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 9.3707)" x="43.2136" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 8.3707)" x="43.2136" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<rect transform="translate(5.6906, 7.3707)" x="43.2136" y="-0.1000" width="1.9743" height="0.2000" ry="0.1000" fill="currentColor"/>
+<line transform="translate(5.6906, 15.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="46.0560" y2="-0.0000"/>
+<line transform="translate(5.6906, 14.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="46.0560" y2="-0.0000"/>
+<line transform="translate(5.6906, 13.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="46.0560" y2="-0.0000"/>
+<line transform="translate(5.6906, 12.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="46.0560" y2="-0.0000"/>
+<line transform="translate(5.6906, 11.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="-0.0000" x2="46.0560" y2="-0.0000"/>
+<rect transform="translate(51.6065, 13.3707)" x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:26:27">
+<path transform="translate(21.5553, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
 </a>
-<rect transform="translate(19.1041, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
-<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/dstyge_shaker.ly:16:11:12">
-<path transform="translate(14.0067, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+<rect transform="translate(21.6203, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:32:33">
+<path transform="translate(24.0714, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
 </a>
-<rect transform="translate(14.0717, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
-<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/dstyge_shaker.ly:16:16:17">
-<path transform="translate(16.5229, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+<rect transform="translate(24.1364, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<rect transform="translate(19.1041, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:22:23">
+<path transform="translate(19.0391, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
 </a>
-<rect transform="translate(16.5879, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<rect transform="translate(16.5879, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:16:17">
+<path transform="translate(16.5229, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<rect transform="translate(14.0717, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:12:13">
+<path transform="translate(14.0067, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
 <polygon transform="translate(11.4906, 12.5607)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.6385 -0.2000 7.6385 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
 <polygon transform="translate(11.4906, 13.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.6385 -0.2000 7.6385 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
-<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/dstyge_shaker.ly:16:6:7">
-<path transform="translate(11.4906, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+<polygon transform="translate(21.5553, 12.5607)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.6385 -0.2000 7.6385 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<polygon transform="translate(21.5553, 13.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.6385 -0.2000 7.6385 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<polygon transform="translate(31.6200, 12.5607)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.6385 -0.2000 7.6385 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<polygon transform="translate(31.6200, 13.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.6385 -0.2000 7.6385 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<polygon transform="translate(41.6847, 12.5607)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.6385 -0.2000 7.6385 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<polygon transform="translate(41.6847, 13.3707)" stroke-linejoin="round" stroke-linecap="round" stroke-width="0.0800" fill="currentColor" stroke="currentColor" points="7.6385 -0.2000 7.6385 0.2000 0.0400 0.2000 0.0400 -0.2000"/>
+<rect transform="translate(36.7173, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:56:57">
+<path transform="translate(36.6523, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<rect transform="translate(34.2012, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:52:53">
+<path transform="translate(34.1362, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:36:37">
+<path transform="translate(26.5876, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<rect transform="translate(26.6526, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:42:43">
+<path transform="translate(29.1038, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<rect transform="translate(29.1688, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:46:47">
+<path transform="translate(31.6200, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<rect transform="translate(31.6850, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
+<rect transform="translate(41.7497, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:66:67">
+<path transform="translate(41.6847, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<rect transform="translate(39.2335, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:62:63">
+<path transform="translate(39.1685, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:6:7">
+<path transform="translate(11.4906, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
 </a>
 <path transform="translate(6.4906, 12.3707) scale(0.0040, -0.0040)" d="M557 -125c0 28 23 51 51 51s51 -23 51 -51s-23 -51 -51 -51s-51 23 -51 51zM557 125c0 28 23 51 51 51s51 -23 51 -51s-23 -51 -51 -51s-51 23 -51 51zM232 263c172 0 293 -88 293 -251c0 -263 -263 -414 -516 -521c-3 -3 -6 -4 -9 -4c-7 0 -13 6 -13 13c0 3 1 6 4 9
 c202 118 412 265 412 493c0 120 -63 235 -171 235c-74 0 -129 -54 -154 -126c11 5 22 8 34 8c55 0 100 -45 100 -100c0 -58 -44 -106 -100 -106c-60 0 -112 47 -112 106c0 133 102 244 232 244z" fill="currentColor"/>
-<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/dstyge_shaker.ly:15:4:5">
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:15:4:5">
 <rect transform="translate(9.6739, 6.5373)" x="1.0563" y="-2.6727" width="0.1158" height="2.5113" ry="0.0193" fill="currentColor"/>
 <path transform="translate(9.6739, 6.5373) scale(0.0036, -0.0036)" d="M217 139c57 0 112 -31 112 -94c0 -72 -55 -121 -102 -149c-35 -21 -74 -35 -115 -35c-57 0 -112 31 -112 94c0 72 55 121 102 149c35 21 74 35 115 35z" fill="currentColor"/>
 <text transform="translate(10.8460, 7.0309)" font-family="Century Schoolbook L" font-size="2.2001" text-anchor="start" fill="currentColor">
@@ -52,7 +143,19 @@ c202 118 412 265 412 493c0 120 -63 235 -171 235c-74 0 -129 -54 -154 -126c11 5 22
  = 123</tspan>
 </text>
 </a>
-<rect transform="translate(11.5556, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<rect transform="translate(11.5556, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
+<rect transform="translate(49.2982, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:82:83">
+<path transform="translate(49.2332, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<rect transform="translate(46.7820, 13.3707)" x="-0.0650" y="-6.3122" width="0.1300" height="6.3122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:76:77">
+<path transform="translate(46.7170, 6.8707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
+<rect transform="translate(44.2659, 13.3707)" x="-0.0650" y="-5.8122" width="0.1300" height="5.8122" ry="0.0400" fill="currentColor"/>
+<a style="color:inherit;" xlink:href="textedit:///Users/jyang/Documents/GitHub/dstyge/notation/dstyge_shaker.ly:16:72:73">
+<path transform="translate(44.2009, 7.3707) scale(0.0040, -0.0040)" d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="currentColor"/>
+</a>
 <a transform="translate(113.9760, 165.1512)" xlink:href="http://lilypond.org/">
 <rect x="0.0000" y="-0.4439" width="56.5755" height="2.0827" fill="none" stroke="none" stroke-width="0.0"/>
 </a>

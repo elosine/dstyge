@@ -10,8 +10,8 @@
   } 
   {
     \time 4/4
-    \clef treble
-      r4 r8 d''8 g'8. g'16 r4    r8 d'' g' d''16 g' r2
+    \clef bass
+      d'''8. d'''16 r8 e'''      d'''8. d'''16 r8 e'''    d'''8. d'''16 r8 e'''     r16 d''' r d'''    d'''8 e'''8
   }
   
   >>

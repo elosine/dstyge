@@ -6,19 +6,19 @@
        
 \score {
   <<
-  \new RhythmicStaff \with {
+  \new RhythmicStaff  \with {
   } 
   {
     \time 4/4
     \clef treble
-      r4 r8 d''8 g'8. g'16 r4    r8 d'' g' d''16 g' r2
+      c,8. c,16 r8. c,16 c,4 r4 
   }
   
   >>
 
   \layout{ 
     indent = 0
-    line-width = 50
+    line-width = 400
   }
   
   \midi{}

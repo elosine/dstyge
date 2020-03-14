@@ -329,7 +329,7 @@ function createScene() {
     }
     // DRAW INITIAL NOTATION FOR EACH TRACK
     for (var i = 0; i < NUMTRACKS; i++) {
-      var t_img = dictOfNotationSVGsByPart["pulseTrack"][i];
+      var t_img = dictOfNotationSVGsByPart["motives"][i];
       notationContainerDOMs[i].appendChild(t_img);
       currentNotationById.push(t_img.id);
     }

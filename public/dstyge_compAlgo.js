@@ -1,3 +1,14 @@
+var notationElementDictByElementByPart = {
+  'motives': [
+    '/notation/shaker.svg',
+    '/notation/bottles.svg',
+    '/notation/handclap.svg',
+    '/notation/bassdrum.svg',
+    '/notation/cowbell.svg',
+    '/notation/snare.svg'
+  ]
+}
+
 // INSTRUMENTS: 0-shaker 1-bottles 2-handclap 3-bassdrum 4-cowbells 5-snare
 var lazyCaterer = [7, 11, 16, 22, 29, 37, 46, 56, 67]; //base 21/7
 var lazyCatererBase = 21.0 / 7.0;
@@ -124,7 +135,7 @@ for (var i = 0; i < insts.length; i++) {
 //SECTION 10 - decel to slow tempi
 var s10st = t_et;
 var s11st = [];
-var s10Tempi = [4,5,6,7,8,9];
+var s10Tempi = [4, 5, 6, 7, 8, 9];
 shuffle(s10Tempi);
 var s10end = s10st + 25;
 for (var i = 0; i < insts.length; i++) {
